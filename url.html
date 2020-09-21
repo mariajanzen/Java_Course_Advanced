@@ -1,0 +1,870 @@
+<!doctype html>
+  <!--[if lte IE 8]>     <html class="no-js lt-ie9" lang="en"> <![endif]-->
+  <!--[if IE 9]>     <html class="ie9" lang="en"> <![endif]-->
+  <!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Database Performance Monitoring with Checkmk | checkmk</title>
+    <meta name="description" content="Get complete visibility into the performance of your database systems with Checkmk">
+    <meta property="og:title" content="Database Performance Monitoring with Checkmk | checkmk">
+    <meta property="og:site_name" content="checkmk.com">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://checkmk.com/database-monitoring.html">
+    <meta property="og:image" content="https://checkmk.com/images/apple-touch-icon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="language" content="en"/>
+    <meta name="msvalidate.01" content="0089DE4B2241982A5555B922245EABC9" />
+    <meta name="theme-color" content="#ffffff">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="google-site-verification" content="EzvuXMBEojK0Huli5k-tjMiJQRbLUAyRxCQ6rIp_Ee8" />
+    <meta name="google-site-verification" content="J8jYBLlipwoKzL-TH80bUeFTOlHpwgFxw66QVMCLy44" />
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://checkmk.com/database-monitoring.html" />
+    <link rel="alternate" hreflang="de" href="https://checkmk.de/database-monitoring.html" />
+    <link rel="alternate" hreflang="en" href="https://checkmk.com/database-monitoring.html" />
+    <link rel="alternate" hreflang="x-default" href="https://checkmk.com/database-monitoring.html" />
+    <link rel="stylesheet" href="inc/styles/prism.min.css">
+    <link rel="stylesheet" href="inc/styles/vendor/chosen.min.css">
+    <link rel="stylesheet" href="inc/styles/vendor/magnific-popup.min.css">
+    <link rel="stylesheet" href="inc/styles/vendor/jquery-ui.min.css">
+    <link rel="stylesheet" href="inc/styles/vendor/rangeslider.css">
+    <link rel="stylesheet" href="inc/styles/vendor/Chart.min.css">
+    <link rel="stylesheet" href="inc/styles/main.min.css?v=21082019">
+    <link rel="stylesheet" type="text/css" href="inc/styles/vendor/slick.css">
+    <link rel="stylesheet" href="nowiki.min.css">
+    <link rel="stylesheet" href="inc/styles/vendor/flag-icon.min.css">
+    <link rel="stylesheet" href="inc/styles/special.min.css?v=10012020">
+    <link rel="stylesheet" href="inc/styles/styles.min.css?v=2705020">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon.png">
+    <link rel="manifest" href="images/manifest.json">
+    <link rel="mask-icon" href="images/safari-pinned-tab.svg" color="#5bbad5">
+
+    <!--[if lt IE 9]>
+    <script src="inc/scripts/vendor/html5shiv.js"></script>
+    <![endif]-->
+    <script src="inc/scripts/vendor/isotope.pkgd.min.js"></script>
+  <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-5RHGL59');</script>
+  <!-- End Google Tag Manager -->
+  </head>
+    <body><div id="checkmkCookieNotice"><div class="cookieStep" id="cookieStep1"><p>We use cookies to ensure that we give you the best experience on our website. &nbsp;Visit our <a href="datenschutzhinweis.html" target='_self'>Privacy Policy</a> to learn more. If you continue to use this site, we will assume that you are okay with it.</p><button class="btn btn-primary" type="button" id="cookiesSubmit">OK</button> <button class="btn btn-info" type="button" id="cookiesInfo">Settings</button></div><div class="cookieStep" id="cookieStep2"><header>Your choices regarding cookies on this site.</header><div id="cookieGroups"><label class="toggle" for="cookieGroupFunctional"><input id="cookieGroupFunctional" name="cookieGroupFunctional" type="checkbox" checked disabled readonly><span class="toggle-slider"></span>Functional cookies</label><label class="toggle" for="cookieGroupPerformance"><input id="cookieGroupPerformance" name="cookieGroupPerformance" type="checkbox"><span class="toggle-slider"></span>Performance cookies</label><label class="toggle" for="cookieGroupAdvertising"><input id="cookieGroupAdvertising" name="cookieGroupAdvertising" type="checkbox"><span class="toggle-slider"></span>Advertising cookies</label></div><button class="btn btn-primary" type="button" id="cookiesSave">Save settings</button><button class="btn btn-cancel" type="button" id="cookiesCancel">Cancel</button></div><div class="cookieStep" id="cookieStep3"><header>Your preferences have been updated.</header><div class='alert alert-warning'>In order for the changes to take effect completely please clear your browser cookies and cache. Then reload the page.</div><button class="btn btn-close" type="button" id="cookiesClose">Close</button></div></div>
+  <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5RHGL59"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+  
+      <!-- Structured Text - Breadcrumb -->
+      <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "item": {
+              "@id": "https://checkmk.com",
+              "name": "checkmk"
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "item": {
+              "@id": "https://checkmk.com/check_mk-monitoring.html",
+              "name": "The Monitoring"
+              }
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "item": {
+              "@id": "https://checkmk.com/use-cases.html",
+              "name": "Use Cases"
+              }
+          },
+          {
+            "@type": "ListItem",
+            "position": 4,
+            "item": {
+              "@id": "https://checkmk.com/database-monitoring.html",
+              "name": "Database Monitoring"
+              }
+          }
+        ]
+      }
+      </script>
+      <!-- End Structured Text - Breadcrumb -->
+
+    <!--[if lt IE 8]>
+    <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+  <!-- Organismus: Header-->
+<header class="header">
+<div class="header-secondary">
+<div class="inner-wrapper">
+<!-- Molekül: Sekundärmenü-->
+<nav class="menu-secondary">
+<ul>
+<li class="secondary-menu-link"><a class="" id="" href="login.html">Login</a></li><li class="secondary-menu-link"><a class="" id="" href="https://forum.checkmk.com">Forum</a></li><li class="secondary-menu-link"><a class="" id="" href="https://blog.checkmk.com">Blog</a></li><li class="secondary-menu-link"><a class="" id="" href="company.html">Company</a></li></ul>
+</nav>
+<!-- /Molekül: Sekundärmenü-->
+<!-- Molekül: Sekundärmenü-->
+<nav class="menu-secondary">
+<ul>
+<li class="secondary-menu-link"><a href="https://checkmk.de/database-monitoring.html">DE</a></li><li class="secondary-menu-link"><a class="is-active" id="" href="#">EN</a></li></ul>
+</nav>
+<!-- /Molekül: Sekundärmenü-->
+</div>
+</div>
+<div class="header-primary">
+<div class="inner-wrapper header-primary-wrapper">
+<div class="logo">
+<a href="./"><svg class="svg-logo-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 800 800"><defs><path id="a" d="M182.5 295.6v127.5l156.3-101V585l61.6 35.6L462 585V322.1l156.2 101V295.6L400.4 159 182.5 295.6zM400.4 16l331.9 192v384L400.4 784 68.5 592V208L400.4 16z"/></defs><clipPath id="b"><use xlink:href="#a" overflow="visible"/></clipPath><g clip-path="url(#b)"><defs><path id="c" d="M-654-1637.7h7418.6v4172.9H-654z"/></defs><clipPath id="d"><use xlink:href="#c" overflow="visible"/></clipPath><path clip-path="url(#d)" fill="#13d389" d="M49.2-3.3h702.4v806.6H49.2z"/></g></svg><svg class="svg-logo-text" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1329.3 268.8"><defs><style>.cls-1{fill:none}</style><clipPath id="clip-path" transform="translate(-1061.2 -1210.2)"><path class="cls-1" d="M2233.5 1462.1v-238.9h28.8v153.1l77.9-83.1h36l-64.8 68.7 66.1 100.1h-34.4l-51.7-79.2-29.1 30.4v48.8h-28.8zm-282.1 0v-168.8h24.5l1 26.5c13.4-20.9 30.1-30.4 53-30.4 23.6 0 39.6 10.1 46.5 29.4 14.1-20.9 31.4-29.4 53-29.4 33.7 0 52.4 20.3 52.4 57.6v115.2H2153v-113c0-22.6-9.8-33.4-27.5-33.4s-32.1 11.1-44.5 35.7v110.6h-28.8v-112.9c0-22.6-9.8-33.4-27.5-33.4-18 0-32.1 11.1-44.5 37.3v109zm-168.2 0v-238.9h18.3v164.6l93.6-93.3h23.6l-68.7 68.4 70 99.1h-22.3l-60.9-86.1-35.3 34.7v51.4l-18.3.1zm-108.6 3.9c-43.8 0-68.4-24.9-68.4-71v-33.4c0-46.1 24.2-71 68.1-71 40.6 0 63.8 21.3 65.4 57.9H1722c-2-28.1-18-41.9-47.1-41.9-33.7 0-50.4 18.3-50.4 56v31.4c0 37.6 16.7 56 50.4 56 29.1 0 45.2-13.7 47.1-41.9h17.7c-1.6 36-24.2 57.9-65.1 57.9zm-228.7-99.4h102.4v-3.6c0-38-16.7-56.3-51.4-56.3s-51 18.3-51 56.3v3.6zm52.6 99.4c-45.8 0-71-24.9-71-71v-33.4c0-46.1 24.5-71 69.4-71s69 24.9 69 71v20.6h-120v11.5c0 38 17 56.3 52 56.3 30.1 0 47.1-13.7 49.1-37h17.7c-2.3 34.4-26.6 53-66.2 53zm-247.3-3.9v-238.9h18.3V1324c14.1-22.6 33.4-33.4 58.2-33.4 34.7 0 52.4 20.9 52.4 60.5V1462h-18.3v-109c0-30.8-11.8-45.8-37-45.8-23.6 0-41.9 13.1-55.3 43.5V1462l-18.3.1zm-108.7 3.9c-43.8 0-68.4-24.9-68.4-71v-33.4c0-46.1 24.2-71 68.1-71 40.6 0 63.8 21.3 65.4 57.9h-17.7c-2-28.1-18-41.9-47.1-41.9-33.7 0-50.4 18.3-50.4 56v31.4c0 37.6 16.7 56 50.4 56 29.1 0 45.2-13.7 47.1-41.9h17.7c-1.6 36-24.2 57.9-65.1 57.9z"/></clipPath><clipPath id="clip-path-2" transform="translate(-1061.2 -1210.2)"><path class="cls-1" d="M0 0h4986.2v2804.8H0z"/></clipPath></defs><g clip-path="url(#clip-path)" id="Layer_1-2" data-name="Layer 1"><g clip-path="url(#clip-path-2)"><path fill="#fff" d="M0 0h1329.3v268.8H0z"/></g></g></svg></a></div>
+<!-- Atom: Menü Toggle Button-->
+<button type="button" class="btn btn-menu-toggle">Menu</button>
+<!-- /Atom: Menü Toggle Button--> 
+<!-- Molekül: Hauptmenü-->
+<nav class="menu-main">
+<ul class="menu-bar">
+<li class="menu-link"><a href="check_mk-monitoring.html" aria-haspopup="true" class="is-active">The Monitoring</a>
+<!-- Molekül: Dropdown Menü-->
+<ul class="menu-dropdown">
+<li class="dropdown-link"><a href="latest-version.html">Latest Version (1.6)</a></li>
+<li class="dropdown-link"><a href="features.html">Features</a></li>
+<li class="dropdown-link"><a href="use-cases.html">Use Cases</a></li>
+<li class="dropdown-link"><a href="insights.html">Insights</a></li>
+<li class="dropdown-link"><a href="plugins.html">Plug-Ins</a></li>
+</ul>
+<!-- /Molekül: Dropdown Menü-->
+</li>
+<li class="menu-link"><a href="products.html" aria-haspopup="true" class="">Products</a>
+<!-- Molekül: Dropdown Menü-->
+<ul class="menu-dropdown">
+<li class="dropdown-link"><a href="editions.html">Editions</a></li>
+<li class="dropdown-link"><a href="appliance.html">Appliance</a></li>
+<li class="dropdown-link"><a href="support.html">Support</a></li>
+<li class="dropdown-link"><a href="subscription.php?">Pricing</a></li>
+</ul>
+<!-- /Molekül: Dropdown Menü-->
+</li>
+<li class="menu-link"><a href="references.html" aria-haspopup="true" class="">References</a>
+</li>
+<li class="menu-link"><a href="userportal.html" aria-haspopup="true" class="">User Portal</a>
+<!-- Molekül: Dropdown Menü-->
+<ul class="menu-dropdown">
+<li class="dropdown-link"><a href="cms.html">The Official Guide</a></li>
+<li class="dropdown-link"><a href="download.php?">Downloads</a></li>
+<li class="dropdown-link"><a href="webinars.html">Webinars</a></li>
+<li class="dropdown-link"><a href="check_mk-werks.php?">Werks</a></li>
+<li class="dropdown-link"><a href="community.html">Community</a></li>
+<li class="dropdown-link"><a href="faq.html">FAQ</a></li>
+<li class="dropdown-link"><a href="https://go.checkmk.com/newsletter">Newsletter</a></li>
+<li class="dropdown-link"><a href="https://exchange.checkmk.com">Checkmk Exchange</a></li>
+</ul>
+<!-- /Molekül: Dropdown Menü-->
+</li>
+<li class="menu-link"><a href="partners.html" aria-haspopup="true" class="">Partners</a>
+<!-- Molekül: Dropdown Menü-->
+<ul class="menu-dropdown">
+<li class="dropdown-link"><a href="find-a-partner.html">Find a Partner</a></li>
+<li class="dropdown-link"><a href="become-a-partner.html">Become a Partner</a></li>
+</ul>
+<!-- /Molekül: Dropdown Menü-->
+</li>
+<li class="menu-link"><a href="training-topics.html" aria-haspopup="true" class="">Training</a>
+<!-- Molekül: Dropdown Menü-->
+<ul class="menu-dropdown">
+<li class="dropdown-link"><a href="training-topics.html">Training Topics</a></li>
+<li class="dropdown-link"><a href="training-schedule.html">Training Schedule</a></li>
+<li class="dropdown-link"><a href="training-locations.html">Locations</a></li>
+<li class="dropdown-link"><a href="conference.html">Conference</a></li>
+</ul>
+<!-- /Molekül: Dropdown Menü-->
+</li>
+</ul>
+</nav>
+<!-- /Molekül: Hauptmenü-->
+<div class="header-button">
+<!-- Atom: Standard Button-->
+<a href="enterprise-free.html" class="btn is-slim">Try for Free</a>
+<!-- /Atom: Standard Button-->
+</div>
+</div>
+</div>
+<div class="bg-primary">
+</div>
+</header>
+<!-- /Organismus: Header-->
+<main class="content-wrapper">
+<div id="database-monitoring">
+<div class="inner-wrapper">
+</div>
+<!-- Molekül: Slide Intro-->
+<div class="slide-intro wide-heading" data-image="bilder/datacenter.jpg">
+<div class="slide-intro-wrapper">
+<div class="inner-wrapper">
+<div class="grid-col grid-xl-6 grid-m-8 grid-s-8 grid-center">
+<!-- Atom: Headline 1-->
+<h1 class="">Database Performance Monitoring with Checkmk</h1>
+<!-- /Atom: Headline 1-->
+<p class="large-text">Complete monitoring of your database servers and databases - including availability, database and table size, cache ratios and many other metrics.</p>
+<button onclick="location.href='enterprise-free.html'" type="button" class="btn btn-white">Try For Free</button>
+</div>
+</div>
+</div>
+</div>
+<!-- /Molekül: Slide Intro-->
+<div class="inner-wrapper">
+<!-- Organismus: Kachel Bild/Text-->
+<div class="img-text-tile grid-col grid-xl-12 grid-s-8  reverse airy high-vert-padding">
+<div class="img-text-tile__text">
+<div class="vertically-centered"><div class="inner-wrapper">
+<!-- Atom: Ungeordnete Liste-->
+<ul class="list fa fa-check">
+<li>Monitor databases on Linux, Solaris, AIX, HP-UX, Windows, as well as OS-specific ones</li>
+<li>Monitor from the 'outside' (via network ports) or from within (via the OS)</li>
+<li>Monitor both on-premise, as well as vendor-specific cloud databases</li>
+<li>Use preconfigured thresholds and shorten configuration time</li>
+<li>Benefit from  standard queries already implemented in the Checkmk plugin -  no database know-how required</li>
+<li>Use active database monitoring via custom queries, where desired</li>
+</ul>
+<!-- /Atom: Ungeordnete Liste-->
+</div>
+</div>
+</div>
+<div class="img-text-tile__img"><img src="bilder/server-monitoring-intro-section.svg" alt="Checkmk IT application monitoring use cases"/></div>
+</div>
+<!-- /Organismus: Kachel Bild/Text-->
+</div>
+<!-- Molekül: Logoleiste-->
+
+      <div class="inner-wrapper">
+<!-- Atom: Headline 3-->
+<h3 class="text-center font-weight-light">Some of the vendors we support</h3>
+<!-- /Atom: Headline 3-->
+<ul class="row p-0 mx-0 justify-content-center">
+<li class="col col-4 col-sm-2 d-flex align-content-center justify-content-center"><img class="align-self-center" src="bilder/logos/logo_oracle_greyscale.png" alt="Oracle">
+</li><li class="col col-4 col-sm-2 d-flex align-content-center justify-content-center"><img class="align-self-center" src="bilder/logos/logo_mysql_greyscale.png" alt="MySQL">
+</li><li class="col col-4 col-sm-2 d-flex align-content-center justify-content-center"><img class="align-self-center" src="bilder/logos/logo_microsoft_greyscale.png" alt="Microsoft">
+</li><li class="col col-4 col-sm-2 d-flex align-content-center justify-content-center"><img class="align-self-center" src="bilder/logos/logo_sap_greyscale.png" alt="SAP">
+</li><li class="col col-4 col-sm-2 d-flex align-content-center justify-content-center"><img class="align-self-center" src="bilder/logos/logo_ibm_greyscale.png" alt="IBM">
+</li><li class="col col-4 col-sm-2 d-flex align-content-center justify-content-center"><img class="align-self-center" src="bilder/logos/logo_aws_greyscale.png" alt="AWS">
+</li></ul>
+</div>
+<!-- /Molekül: Logoleiste-->
+<div class="inner-wrapper">
+<div class="inner-wrapper">
+<div class="grid-wrapper">
+<div class="grid-col grid-xl-12 grid-l-12 grid-s-8">
+<!-- Atom: Paragraph-->
+<p class=""></p>
+<!-- /Atom: Paragraph-->
+</div>
+</div>
+</div>
+<div class="inner-wrapper">
+<!-- Atom: Headline 2-->
+<h2 class="centered horizontal-padding">Database Performance Monitoring</h2>
+<!-- /Atom: Headline 2-->
+</div>
+<!-- Organismus: Kachel Bild/Text-->
+<div class="img-text-tile grid-col grid-xl-12 grid-s-8  reverse img-offset">
+<div class="img-text-tile__text">
+<div class="inner-wrapper">
+<div class="grid-wrapper">
+<div class="grid-col grid-xl-12 grid-l-12 grid-s-8">
+<!-- Atom: Paragraph-->
+<p class="">Checkmk enables you to see what's currently running on each of your database instances.
+    Monitor database attributes that are critical to your business operations and visualize them on a custom dashboard:</p>
+<!-- /Atom: Paragraph-->
+</div>
+</div>
+</div>
+<!-- Atom: Ungeordnete Liste-->
+<ul class="list no-margin-top padding-bottom">
+<li><b>Oracle</b> - Checkmk supports monitoring databases starting from version 10.2. Use it to monitor multi-tenant
+          architectures, Exadata, container-based databases and much more.</li>
+<li><b>MSSQL Server</b> - Monitor MSSQL Server starting with Windows Server 2008 R2 and get detailed info on resource metrics (e.g. data- &
+          logfiles), performance data (e.g. cache hit ratio) and other parts of your databases.</li>
+<li><b>MySQL/MariaDB</b> - Monitor core performance and resource usage metrics (e.g. tablespaces).</li>
+<li><b>SAP Hana</b> - Get insights into the health and performance of your SAP HANA implementation. Troubleshoot issues quickly, before users are affected.</li>
+<li><b>PostgreSQL</b> - Perform a fine-grained monitoring of database activity by tracking what queries really do. Improve availability by monitoring instances, sessions and much more.</li>
+<li><b>Cloud-based</b> - With Checkmk you get immediate visibility into the performance of your Amazon RDS & Azure SQL Database instances.</li>
+<li><b>Other databases</b> - Checkmk also supports the monitoring of other database systems such as: MongoDB, IBM DB2, IBM Informix etc.</li>
+</ul>
+<!-- /Atom: Ungeordnete Liste-->
+<!-- Atom: Standard Button-->
+<a href="enterprise-free.html" class="btn btn-blue">Try For Free</a>
+<!-- /Atom: Standard Button-->
+</div>
+<div class="img-text-tile__img"><img src="bilder/database-monitoring-alldb.svg" alt="Checkmk monitors all database types"/></div>
+</div>
+<!-- /Organismus: Kachel Bild/Text-->
+<!-- Organismus: Kachel Bild/Text-->
+<div class="img-text-tile grid-col grid-xl-12 grid-s-8  airy img-offset">
+<div class="img-text-tile__text">
+<!-- Atom: Headline 2-->
+<h2 class="">Oracle Database Monitoring</h2>
+<!-- /Atom: Headline 2-->
+<div class="inner-wrapper">
+<div class="grid-wrapper">
+<div class="grid-col grid-xl-12 grid-l-12 grid-s-8">
+<!-- Atom: Paragraph-->
+<p class="no-margin-bottom">Use just one plugin to monitor all your Oracle databases and go beyond monitoring the basics (tablespaces, active sessions etc.) to get in-depth performance data for all your instances.
+      <br><br>Checkmk provides comprehensive options for the monitoring of Oracle databases which cover:</p>
+<!-- /Atom: Paragraph-->
+</div>
+</div>
+</div>
+<!-- Atom: Ungeordnete Liste-->
+<ul class="list no-margin-top no-margin-bottom">
+<li>Oracle Real Application Cluster (RAC) with and without Data Guard</li>
+<li>Oracle Automatic Storage Management (ASM)</li>
+<li>Oracle Wallet (allow user access without password)</li>
+<li>Oracle DIVA</li>
+<li>Oracle CRS</li>
+</ul>
+<!-- /Atom: Ungeordnete Liste-->
+<!-- Atom: Standard Button-->
+<a href="cms_monitoring_oracle.html" class="btn btn-blue">Oracle monitoring guide</a>
+<!-- /Atom: Standard Button-->
+</div>
+<div class="img-text-tile__img"><a class="gallery-item-single " href="bilder/database-monitoring-oracle-screen.jpg">
+<!-- Atom: Responsives Bild-->
+<img src="bilder/database-monitoring-oracle-screen-preview.jpg" alt="Oracle Database Monitoring"/>
+<!-- /Atom: Responsives Bild-->
+</a></div>
+</div>
+<!-- /Organismus: Kachel Bild/Text-->
+<!-- Organismus: Kachel Bild/Text-->
+<div class="img-text-tile grid-col grid-xl-12 grid-s-8  airy reverse img-offset">
+<div class="img-text-tile__text">
+<!-- Atom: Headline 2-->
+<h2 class="">MSSQL Server Monitoring</h2>
+<!-- /Atom: Headline 2-->
+<div class="inner-wrapper">
+<div class="grid-wrapper">
+<div class="grid-col grid-xl-12 grid-l-12 grid-s-8">
+<!-- Atom: Paragraph-->
+<p class="no-margin-bottom">Take a pro-active approach and optimize Microsoft SQL Server performance with ease.
+    Streamline access by using 'trusted authentication', so no user/password needs to be created on the SQL Server instance.
+    <br><br>Use separate services of backup type for each tablespace and set specific levels for each backup type. Understand
+    how application performance is affected by getting detailed info on metrics such as:</p>
+<!-- /Atom: Paragraph-->
+</div>
+</div>
+</div>
+<!-- Atom: Ungeordnete Liste-->
+<ul class="list no-margin-top no-margin-bottom">
+<li>Locks per batch and locks per second</li>
+<li>Cache hit ratio</li>
+<li>Transactions per second</li>
+<li>Size of data- and logfiles</li>
+</ul>
+<!-- /Atom: Ungeordnete Liste-->
+</div>
+<div class="img-text-tile__img"><a class="gallery-item-single " href="bilder/database-monitoring-mssql-screen.jpg">
+<!-- Atom: Responsives Bild-->
+<img src="bilder/database-monitoring-mssql-screen-preview.jpg" alt="MSSQL Database Monitoring"/>
+<!-- /Atom: Responsives Bild-->
+</a></div>
+</div>
+<!-- /Organismus: Kachel Bild/Text-->
+<!-- Organismus: Kachel Bild/Text-->
+<div class="img-text-tile grid-col grid-xl-12 grid-s-8  airy img-offset">
+<div class="img-text-tile__text">
+<!-- Atom: Headline 2-->
+<h2 class="">MySQL/MariaDB Performance Monitoring</h2>
+<!-- /Atom: Headline 2-->
+<div class="inner-wrapper">
+<div class="grid-wrapper">
+<div class="grid-col grid-xl-12 grid-l-12 grid-s-8">
+<!-- Atom: Paragraph-->
+<p class="no-margin-bottom">Checkmk is a comprehensive & simple-to-configure tool used to monitor any version of MySQL/MariaDB databases running
+    on Linux and Windows.
+    <br><br>Among other, with Checkmk you can:</p>
+<!-- /Atom: Paragraph-->
+</div>
+</div>
+</div>
+<!-- Atom: Ungeordnete Liste-->
+<ul class="list no-margin-top no-margin-bottom">
+<li>Monitor MySQL/MariaDB clusters, slaves and resource usage</li>
+<li>Track the IO rate of the InnoDB database engine for MySQL</li>
+</ul>
+<!-- /Atom: Ungeordnete Liste-->
+</div>
+<div class="img-text-tile__img"><a class="gallery-item-single " href="bilder/database-monitoring-mysql-screen.jpg">
+<!-- Atom: Responsives Bild-->
+<img src="bilder/database-monitoring-mysql-screen-preview.jpg" alt="MySQL Database Monitoring"/>
+<!-- /Atom: Responsives Bild-->
+</a></div>
+</div>
+<!-- /Organismus: Kachel Bild/Text-->
+</div>
+<section class="icon-teaser-list ">
+<!-- Molekül: Section Intro-->
+<header class="section-header">
+<!-- Atom: Headline 2-->
+<h2 class="">Reasons to choose Checkmk for monitoring your database systems</h2>
+<!-- /Atom: Headline 2-->
+</header>
+<!-- /Molekül: Section Intro-->
+<div class="teaser-slider slick-slider inner-wrapper">
+<!-- Molekül: Icon Teaser-->
+<div class="icon-teaser grid-col grid-xl-4 grid-s-8">
+<!-- Atom: Icon-->
+<img src="bilder/application-monitoring-scale-horizontally.svg" alt="" class="icon no-padding"/>
+<!-- /Atom: Icon-->
+<!-- Atom: Dachzeile-->
+<p class="roofline ">Auto-discovery</p>
+<!-- /Atom: Dachzeile-->
+<!-- Atom: Paragraph-->
+<p class="">Checkmk automatically detects and monitors your databases (no configuration overhead).</p>
+<!-- /Atom: Paragraph-->
+</div>
+<!-- /Molekül: Icon Teaser-->
+<!-- Molekül: Icon Teaser-->
+<div class="icon-teaser grid-col grid-xl-4 grid-s-8">
+<!-- Atom: Icon-->
+<img src="bilder/logos/storage-monitoring-increase-uptime.svg" alt="" class="icon"/>
+<!-- /Atom: Icon-->
+<!-- Atom: Dachzeile-->
+<p class="roofline ">Increase uptime</p>
+<!-- /Atom: Dachzeile-->
+<!-- Atom: Paragraph-->
+<p class="">Easily detect and solve database-related issues that impact application performance.</p>
+<!-- /Atom: Paragraph-->
+</div>
+<!-- /Molekül: Icon Teaser-->
+<!-- Molekül: Icon Teaser-->
+<div class="icon-teaser grid-col grid-xl-4 grid-s-8">
+<!-- Atom: Icon-->
+<img src="bilder/application-monitoring-fast-setup.svg" alt="" class="icon"/>
+<!-- /Atom: Icon-->
+<!-- Atom: Dachzeile-->
+<p class="roofline ">It's fast to get started</p>
+<!-- /Atom: Dachzeile-->
+<!-- Atom: Paragraph-->
+<p class="">Checkmk enables you to go from zero to monitoring in less than 15 minutes.</p>
+<!-- /Atom: Paragraph-->
+</div>
+<!-- /Molekül: Icon Teaser-->
+</div>
+</section>
+<div class="inner-wrapper">
+<!-- Atom: Trennlinie-->
+<div align="center">
+<hr style="width: 200px;">
+</div>
+<!-- /Atom: Trennlinie-->
+<!-- Organismus: Teaser Slideshow-->
+<section class="teaser-slideshow white_background">
+<div class="inner-wrapper">
+<!-- Atom: Headline 2-->
+<h2 class="centered">Testimonials</h2>
+<!-- /Atom: Headline 2-->
+<div class="teaser-quote-slides slick-slider">
+<!-- Molekül: Zitat-->
+<div class="quote no-border grid-col grid-xl-10 grid-xl-pp-1 grid-s-8">
+<blockquote>
+<p>With Checkmk we have visibility and insight into the systems and
+      applications that power our business. We know the lifecycle and usage
+      patterns of our systems thanks to Checkmk and this is really a powerful
+      feature when making important business decisions regarding these systems.
+      <br><br>We do not have to do guess work, it is a matter of pulling up the right
+      view or generating the report and looking at the details..</p>
+<cite>Marius P. - CEO</cite>
+</blockquote>
+</div>
+<!-- /Molekül: Zitat-->
+<!-- Molekül: Zitat-->
+<div class="quote no-border grid-col grid-xl-10 grid-xl-pp-1 grid-s-8">
+<blockquote>
+<p>We are monitoring IT infrastructure from UPSs over servers, hypervisors,
+      network, SAN and NAS storage up to the operating systems and databases as
+      well as SAP for over 80 customers with Checkmk and have made excellent
+      experiences with the tool, the technical support and also the user community.</p>
+<cite>Gerd S. - Teamlead Monitoring</cite>
+</blockquote>
+</div>
+<!-- /Molekül: Zitat-->
+<!-- Molekül: Zitat-->
+<div class="quote no-border grid-col grid-xl-10 grid-xl-pp-1 grid-s-8">
+<blockquote>
+<p>The whole Checkmk environment has a very mature, stable foundation of
+      supported checks and performance counters. Yet it grows almost on a daily
+      basis.
+      <br><br>Support for new systems is being implemented very often and
+      if you are willing to request it yourself, you can have it included in
+      the core distribution in very little time. This agility really has no
+      match among the larger competitors.</p>
+<cite>Wolfgang G. - Service Manager</cite>
+</blockquote>
+</div>
+<!-- /Molekül: Zitat-->
+</div>
+</div>
+</section>
+<!-- /Organismus: Teaser Slideshow-->
+</div>
+<!-- Molekül: Logoleiste-->
+
+      <div class="inner-wrapper">
+<!-- Atom: Headline 3-->
+<h3 class="text-center font-weight-light">Trusted by global brands and local organizations worldwide</h3>
+<!-- /Atom: Headline 3-->
+<ul class="row p-0 mx-0 justify-content-center">
+<li class="col col-4 col-sm-2 d-flex align-content-center justify-content-center"><img class="align-self-center" src="bilder/logos/logo_zalando.svg" alt="Zalando">
+</li><li class="col col-4 col-sm-2 d-flex align-content-center justify-content-center"><img class="align-self-center" src="bilder/logos/logo_bosch_breit.png" alt="Robert Bosch">
+</li><li class="col col-4 col-sm-2 d-flex align-content-center justify-content-center"><img class="align-self-center" src="bilder/logos/logo_airbus.svg" alt="Airbus Defence and Space">
+</li><li class="col col-4 col-sm-2 d-flex align-content-center justify-content-center"><img class="align-self-center" src="bilder/logos/logo_db_schenker.svg" alt="DB Schenker">
+</li><li class="col col-4 col-sm-2 d-flex align-content-center justify-content-center"><img class="align-self-center" src="bilder/logos/logo_groupon.svg" alt="Groupon">
+</li><li class="col col-4 col-sm-2 d-flex align-content-center justify-content-center"><img class="align-self-center" src="bilder/logos/logo_vodafone.svg" alt="Vodafone">
+</li></ul>
+</div>
+<!-- /Molekül: Logoleiste-->
+<div class="inner-wrapper">
+</div>
+<div class="inner-wrapper">
+<!-- Molekül: Multi column bullet list -->
+<div class="link-list link-list-resources grid-col grid-xl-12 grid-s-8">
+<h3 class="link-list-header">Resources</h3>
+<div class="link-list-module-section">
+<div class="three-columns-list">
+<!-- Atom: Icon-Liste-->
+<h3 class="link-list-item-header">Try it yourself</h3><div class="link-list-links ">
+<ul>
+<li>
+<a href="cms_check_plugins_catalog.html" target="_blank">
+<i class="fa fa-file-text-o"></i>
+List of Checkmk Plug-Ins</a>
+</li>
+<li>
+<a href="demoserver.html" target="_blank">
+<i class="fa fa-laptop"></i>
+Interactive Demo</a>
+</li>
+</ul>
+</div>
+<!-- /Atom: Icon Liste-->
+</div>
+<div class="three-columns-list">
+<!-- Atom: Icon-Liste-->
+<h3 class="link-list-item-header">Talk to us</h3><div class="link-list-links ">
+<ul>
+<li>
+<a href="https://go.checkmk.com/schedule-a-demo?utm_campaign=Request%20a%20Demo&utm_source=website&utm_medium=resources-link" target="_blank">
+<i class="fa fa-phone"></i>
+Schedule a Demo</a>
+</li>
+<li>
+<a href="contact.html" target="_blank">
+<i class="fa fa-phone"></i>
+Request a Quote</a>
+</li>
+</ul>
+</div>
+<!-- /Atom: Icon Liste-->
+</div>
+<div class="three-columns-list">
+<!-- Atom: Icon-Liste-->
+<h3 class="link-list-item-header">Learn more about checkmk</h3><div class="link-list-links ">
+<ul>
+<li>
+<a href="cms.html" target="_blank">
+<i class="fa fa-book"></i>
+Checkmk Documentation</a>
+</li>
+<li>
+<a href="training-topics.html" target="_blank">
+<i class="fa fa-graduation-cap"></i>
+Training & Conferences</a>
+</li>
+</ul>
+</div>
+<!-- /Atom: Icon Liste-->
+</div>
+</div>
+</div>
+<!-- /Molekül: News entry-->
+</div>
+<div class="inner-wrapper">
+</div>
+<!-- Molekül: Slide Intro-->
+<div class="slide-intro light-gray">
+<div class="slide-intro-wrapper">
+<div class="inner-wrapper">
+<div class="grid-col grid-xl-8 grid-m-10 grid-s-8 grid-center">
+<!-- Atom: Headline 2-->
+<h2 class="bold">Try Checkmk Enterprise Free Edition!</h2>
+<!-- /Atom: Headline 2-->
+<p class="large-text">Download the latest version of Checkmk Enterprise Free Edition today and see it in action.</p>
+<button onclick="location.href='enterprise-free.html'" type="button" class="btn btn-grey">Try For Free</button>
+</div>
+</div>
+</div>
+</div>
+<!-- /Molekül: Slide Intro-->
+<div class="inner-wrapper">
+
+    <!-- Structured Text -->
+    <script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Checkmk Enterprise Edition",
+        "image": "https://checkmk.com/bilder/logos/check_mk.png",
+        "datePublished": "2020-07-05",
+        "applicationCategory": "UtilitiesApplication",
+        "downloadUrl": "https://checkmk.com/download.php",
+        "operatingSystem": "Linux, Windows, macOS",
+        "screenshot": "https://checkmk.com/bilder/services-on-a-host.png",
+      	"softwareVersion":"1.6.0p13",
+      	"provider": {
+      	    "@type":"Organization",
+      	    "name":"tribe29 GmbH",
+      	    "url": "https://checkmk.com",
+      	    "aggregateRating": {
+                "@type": "AggregateRating",
+                "ratingValue": "4.6",
+                "bestRating": "5",
+                "worstRating": "0",
+                "reviewCount": "16"
+            },
+      	    "review": [
+                {
+                    "@type": "Review",
+                    "author": "Marius P.",
+                    "datePublished": "13-01-2019",
+                    "description": "Best in-class IT monitoring",
+                    "reviewBody": "Check_MK in just a few minutes after being installed will provide you with deep insight and visibility into your systems and applications. Auto-discovery of services is a time saving feature that gets you up and running very quickly.",
+                    "reviewRating": {
+                        "@type": "Rating",
+                        "bestRating": "5",
+                        "ratingValue": "5.0",
+                        "worstRating": "0"
+                    },
+                    "publisher": {
+                        "@type": "Organization",
+                        "name": "G2",
+                        "sameAs": "https://www.g2.com/products/check_mk/reviews/check_mk-review-1554097"
+                    }
+                }
+            ]
+      	},
+        "offers": {
+            "@type":"Offer",
+            "price":"600",
+            "priceCurrency":"EUR"
+        }
+     }
+    </script>
+    <!-- Structured Text -->
+</div>
+<!-- Organismus: Footer-->
+<footer class="footer">
+<div class="sitemap">
+<div class="inner-wrapper">
+<!-- Molekül: Linkliste-->
+<ul class="linklist">
+<li class="grid-col grid-m-4 grid-s-4 secondary-menu-link"><a href="check_mk-monitoring.html">The Monitoring</a>
+<ul>
+<li class="secondary-menu-link"><a href="latest-version.html" class="has-arrow">Latest Version (1.6)</a></li>
+<li class="secondary-menu-link"><a href="features.html" class="has-arrow">Features</a></li>
+<li class="secondary-menu-link"><a href="use-cases.html" class="has-arrow">Use Cases</a></li>
+<li class="secondary-menu-link"><a href="insights.html" class="has-arrow">Insights</a></li>
+<li class="secondary-menu-link"><a href="plugins.html" class="has-arrow">Plug-Ins</a></li>
+</ul>
+</li>
+<li class="grid-col grid-m-4 grid-s-4 secondary-menu-link"><a href="products.html">Products</a>
+<ul>
+<li class="secondary-menu-link"><a href="editions.html" class="has-arrow">Editions</a></li>
+<li class="secondary-menu-link"><a href="appliance.html" class="has-arrow">Appliance</a></li>
+<li class="secondary-menu-link"><a href="support.html" class="has-arrow">Support</a></li>
+<li class="secondary-menu-link"><a href="subscription.php?" class="has-arrow">Pricing</a></li>
+</ul>
+</li>
+<li class="grid-col grid-m-4 grid-s-4 secondary-menu-link"><a href="use-cases.html">Use Cases</a>
+<ul>
+<li class="secondary-menu-link"><a href="servers.html" class="has-arrow">Server Monitoring</a></li>
+<li class="secondary-menu-link"><a href="application-monitoring.html" class="has-arrow">Application Monitoring</a></li>
+<li class="secondary-menu-link"><a href="network-monitoring.html" class="has-arrow">Network Monitoring</a></li>
+<li class="secondary-menu-link"><a href="cloud-monitoring.html" class="has-arrow">Cloud Monitoring</a></li>
+<li class="secondary-menu-link"><a href="container-monitoring.html" class="has-arrow">Container Monitoring</a></li>
+<li class="secondary-menu-link"><a href="storage-monitoring.html" class="has-arrow">Storage Monitoring</a></li>
+<li class="secondary-menu-link"><a href="environment-monitoring.html" class="has-arrow">Environment Monitoring</a></li>
+<li class="secondary-menu-link"><a href="database-monitoring.html" class="has-arrow">Database Monitoring</a></li>
+<li class="secondary-menu-link"><a href="open-source-monitoring.html" class="has-arrow">Open Source Monitoring</a></li>
+<li class="secondary-menu-link"><a href="snmp-monitoring.html" class="has-arrow">SNMP Monitoring</a></li>
+<li class="secondary-menu-link"><a href="docker-monitoring.html" class="has-arrow">Docker Monitoring</a></li>
+</ul>
+</li>
+<li class="grid-col grid-m-4 grid-s-4 secondary-menu-link"><a href="userportal.html">User Portal</a>
+<ul>
+<li class="secondary-menu-link"><a href="cms.html" class="has-arrow">The Official Guide</a></li>
+<li class="secondary-menu-link"><a href="download.php?" class="has-arrow">Downloads</a></li>
+<li class="secondary-menu-link"><a href="webinars.html" class="has-arrow">Webinars</a></li>
+<li class="secondary-menu-link"><a href="check_mk-werks.php?" class="has-arrow">Werks</a></li>
+<li class="secondary-menu-link"><a href="community.html" class="has-arrow">Community</a></li>
+<li class="secondary-menu-link"><a href="faq.html" class="has-arrow">FAQ</a></li>
+<li class="secondary-menu-link"><a href="https://go.checkmk.com/newsletter" class="has-arrow">Newsletter</a></li>
+<li class="secondary-menu-link"><a href="https://exchange.checkmk.com" class="has-arrow">Checkmk Exchange</a></li>
+</ul>
+</li>
+<li class="grid-col grid-m-4 grid-s-4 secondary-menu-link"><a href="partners.html">Partners</a>
+<ul>
+<li class="secondary-menu-link"><a href="find-a-partner.html" class="has-arrow">Find a Partner</a></li>
+<li class="secondary-menu-link"><a href="become-a-partner.html" class="has-arrow">Become a Partner</a></li>
+</ul>
+</li>
+<li class="grid-col grid-m-4 grid-s-4 secondary-menu-link"><a href="training-topics.html">Training</a>
+<ul>
+<li class="secondary-menu-link"><a href="training-topics.html" class="has-arrow">Training Topics</a></li>
+<li class="secondary-menu-link"><a href="training-schedule.html" class="has-arrow">Training Schedule</a></li>
+<li class="secondary-menu-link"><a href="training-locations.html" class="has-arrow">Locations</a></li>
+<li class="secondary-menu-link"><a href="conference.html" class="has-arrow">Conference</a></li>
+</ul>
+</li>
+</ul>
+<!-- /Molekül: Linkliste-->
+</div>
+<div class="inner-wrapper">
+<!-- Molekül: Linkliste-->
+<ul class="linklist">
+<li class="grid-col grid-m-4 grid-s-4 secondary-menu-link"><a href="contact.php?">Contact</a>
+<ul>
+</ul>
+</li>
+<li class="grid-col grid-m-4 grid-s-4 secondary-menu-link"><a href="impressum.html">Imprint</a>
+<ul>
+</ul>
+</li>
+<li class="grid-col grid-m-4 grid-s-4 secondary-menu-link"><a href="brand-assets.html">Brand Assets</a>
+<ul>
+</ul>
+</li>
+<li class="grid-col grid-m-4 grid-s-4 secondary-menu-link"><a href="legal.html">Legal</a>
+<ul>
+</ul>
+</li>
+<li class="grid-col grid-m-4 grid-s-4 secondary-menu-link"><a href="datenschutzhinweis.html">Data Protection Advice</a>
+<ul>
+</ul>
+</li>
+</ul>
+<!-- /Molekül: Linkliste-->
+<li class="grid-col grid-m-4 grid-s-4 secondary-menu-link"><!-- Atom: Link mit Icon-->
+
+<a href="mailto:info@checkmk.com" class="has-icon ">
+<i class="fa fa-envelope"></i> info@checkmk.com</a><!-- /Atom: Link mit Icon--></li>
+</div>
+</div>
+<div class="footer-logo inner-wrapper">
+<div class="logo"><a href="./" class="grayscale"><img src="bilder/mk-logo.png" alt="Checkmk"/></a></div>
+</div>
+<div class="footer-social inner-wrapper">
+<ul class="footer-social-list">
+<li><a href="https://twitter.com/checkmk" target="_blank" rel="noopener"><i class="fa fa-twitter"></i></a></li>
+<li><a href="https://www.linkedin.com/company/checkmk" target="_blank" rel="noopener"><i class="fa fa-linkedin-square"></i></a></li>
+<li><a href="https://reddit.com/r/checkmk/" target="_blank" rel="noopener"><i class="fa fa-reddit-alien"></i></a></li>
+<li><a href="https://www.facebook.com/checkmk" target="_blank" rel="noopener"><i class="fa fa-facebook-square"></i></a></li>
+<li><a href="https://github.com/tribe29/checkmk/" target="_blank" rel="noopener"><i class="fa fa-github"></i></a></li>
+<li><a href="https://www.xing.com/companies/tribe29gmbh" target="_blank" rel="noopener"><i class="fa fa-xing"></i></a></li>
+<li><a href="https://www.youtube.com/channel/UCXvQ8WOBvzx7_-8z6UqxR8w" target="_blank" rel="noopener"><i class="fa fa-youtube"></i></a></li>
+</ul>
+</div>
+<div class="footer-trademark inner-wrapper">
+<p>The Checkmk logo (formerly known as Check_MK) is a trademark of tribe29 GmbH.</p>
+<p>©2020 tribe29 GmbH. All rights reserved.</p>
+</div>
+</footer>
+<!-- /Organismus: Footer-->
+</div>
+</main>
+<script src="inc/scripts/vendor/jquery-1.11.1.min.js"></script>
+<script src="inc/scripts/cookies.min.js?v=13082019"></script>
+<script src="inc/scripts/prism.min.js"></script>
+<script src="inc/scripts/vendor/slick.min.js"></script>
+<script src="inc/scripts/vendor/isotope.pkgd.min.js"></script>
+<script src="inc/scripts/vendor/jquery.waypoints.min.js"></script>
+<script src="inc/scripts/vendor/jquery.countup.min.js"></script>
+<script src="inc/scripts/vendor/jquery.magnific-popup.min.js"></script>
+<script src="inc/scripts/vendor/jquery-ui.min.js"></script>
+<script src="inc/scripts/vendor/jquery.initialize.min.js"></script>
+<script src="inc/scripts/vendor/rangeslider.min.js"></script>
+<script src="inc/scripts/main.min.js?v=25062020"></script>
+<script src="inc/scripts/e2e.min.js?v=2"></script>
+<script src="inc/scripts/chosen.jquery.min.js"></script>
+<script src="inc/scripts/vendor/jquery.basictable.min.js"></script>
+<script src="inc/scripts/guide.min.js"></script>
+<script src="inc/scripts/vendor/modernizr.min.js" type="text/javascript"></script>
+<script>
+      $(document).ready(function() {
+
+        $('code').each(function() {
+          var _prism = null;
+
+          if ($(this).hasClass('css')) {
+            $(this).addClass('language-css');
+            _prism = this;
+          } else if ($(this).hasClass('scss')) {
+            $(this).addClass('language-scss');
+            _prism = this;
+          } else if ($(this).hasClass('js')) {
+            $(this).addClass('language-javascript');
+            _prism = this;
+          }
+
+          if (_prism) {
+            Prism.highlightElement(this);
+          }
+        });
+
+      });
+    </script>
+<script>
+    var sortingHyperlinks = document.getElementsByClassName('sorting-hyperlink');
+
+    var url_parts = window.location.search.substr(1).split('&');
+    var _GET = {};
+    for (var i = 0; i < url_parts.length; i++) {
+        var temp = url_parts[i].split('=');
+        _GET[decodeURIComponent(temp[0])] = decodeURIComponent(temp[1]);
+    }
+    if (_GET['sort_by']) {
+        var sortBy = _GET['sort_by'].replace(/_desc|_asc/, '');
+        var sortingDirection = _GET['sort_by'].match(/_desc|_asc/);
+
+        for (var i = 0; i < sortingHyperlinks.length ; i++) {
+            if (sortingHyperlinks[i].href.match(sortBy)) {
+                if (sortingDirection == '_desc') {
+                    sortingHyperlinks[i].classList.remove('ascending');
+                    sortingHyperlinks[i].classList.add('descending');
+                    sortingHyperlinks[i].href = sortingHyperlinks[i].href.replace(/_desc/, '_asc');
+                }
+                else if (sortingDirection == '_asc') {
+                    sortingHyperlinks[i].classList.remove('descending');
+                    sortingHyperlinks[i].classList.add('ascending');
+                    sortingHyperlinks[i].href = sortingHyperlinks[i].href.replace(/_asc/, '_desc');
+                }
+            }
+            else {
+                sortingHyperlinks[i].classList.remove('ascending');
+                sortingHyperlinks[i].classList.remove('descending');
+                if (sortingHyperlinks[i].href.match('_asc'))
+                    sortingHyperlinks[i].href = sortingHyperlinks[i].href.replace(/_asc/, '_desc');
+            }
+        }
+    }
+    </script>
+</body>
+</html>

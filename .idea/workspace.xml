@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="00439310-ef78-4af7-a820-2f0ffdcab3c0" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Homework/Hfb_Projekt_33_HW20/src/com/company/Account.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Homework/Hfb_Projekt_33_HW20/src/com/company/Client.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Homework/Hfb_Projekt_33_HW20/src/com/company/LegalEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Homework/Hfb_Projekt_33_HW20/src/com/company/PrivatePerson.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Java/Projekt_IT_32_3006/src/com/company/Lazyemployee.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Java/Projekt_IT_33_0607/src/com/company/Circle.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Java/Projekt_IT_33_0607/src/com/company/DBFigures.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Java/Projekt_IT_33_0607/src/com/company/Rectangle.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Java/Projekt_IT_33_0607/src/com/company/Shape.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Java/Projekt_IT_33_0607/src/com/company/Square.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Java/Projekt_IT_34_1007/src/com/company/Booking.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Java/Projekt_IT_34_1007/src/com/company/persons/Date.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Java/Projekt_IT_34_1007/src/com/company/persons/Person.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Java/Projekt_IT_34_1007/src/com/company/repository/DBMockPersons.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Java/Projekt_IT_34_1007/src/com/company/repository/DBMockRooms.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Java/Projekt_IT_34_1007/src/com/company/rooms/Apartment.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Java/Projekt_IT_34_1007/src/com/company/rooms/Deluxe.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Java/Projekt_IT_34_1007/src/com/company/rooms/DoubleRoom.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Java/Projekt_IT_34_1007/src/com/company/rooms/Rooms.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Java/Projekt_IT_34_1007/src/com/company/rooms/SingleRoom.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Java/Projekt_IT_35_2707/src/com/company/Card.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Java/Projekt_IT_35_2707/src/com/company/DBMockBankDate.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Java/Projekt_IT_35_2707/src/com/company/MasterCard.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Java/Projekt_IT_35_2707/src/com/company/Person.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Java/Projekt_IT_35_2707/src/com/company/Visa.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Java/Projekt_IT_36_2807/src/com/company/Person.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Java/Projekt_IT_37_3007/src/com/company/CodeWord.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Java/Projekt_IT_32_3006/src/com/company/Employee.java" beforeDir="false" afterPath="$PROJECT_DIR$/Java/Projekt_IT_32_3006/src/com/company/Employee.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Java/Projekt_IT_32_3006/src/com/company/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/Java/Projekt_IT_32_3006/src/com/company/Main.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/Homework" />
+  </component>
+  <component name="ProjectId" id="1fbIULRQLSNVGdi0cv6Rn8EqcQC" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="00439310-ef78-4af7-a820-2f0ffdcab3c0" name="Default Changelist" comment="" />
+      <created>1596480379059</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1596480379059</updated>
+    </task>
+    <servers />
+  </component>
+</project>
