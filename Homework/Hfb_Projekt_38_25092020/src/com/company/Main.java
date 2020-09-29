@@ -52,7 +52,6 @@ public class Main {
         System.out.println(middleTwo("string"));
         System.out.println(middleTwo("code"));
         System.out.println(middleTwo("Practice"));
-
     }
 
     public static int diff21(int n){
