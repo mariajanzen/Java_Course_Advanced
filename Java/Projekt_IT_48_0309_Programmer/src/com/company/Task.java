@@ -60,8 +60,17 @@ public class Task implements Comparable<Task> {
         return Objects.hash(description, id, status, priority);
     }
 
+    public int getPrioritiesInNumbers(Priority priority){
+        return priority.getPrioritiesInNumbers();
+    }
+
+    public Priority getPriority() {
+        return priority;
+    }
+
     @Override
-    public int compareTo(Task o) {
-        return 0;
+    public int compareTo(Task task) {
+
+        return this.getPriority().compareTo(task.getPriority());
     }
 }

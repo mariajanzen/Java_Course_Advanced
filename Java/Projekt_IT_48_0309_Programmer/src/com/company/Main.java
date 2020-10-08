@@ -3,6 +3,7 @@ package com.company;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Queue;
 
 public class Main {
 
@@ -21,8 +22,15 @@ public class Main {
         tasks.add(task4);
         tasks.add(task5);
 
+        Queue<Task> queue = TaskHandler.taskQueue(tasks);
+        System.out.println(queue);
+        Task iTask = queue.poll();
+        while(iTask!=null){
+            System.out.println(iTask);
+            iTask = queue.poll();
+        }
 
-        System.out.println(TaskHandler.taskQueue(tasks));
+        //System.out.println(queue);
 
 
 
