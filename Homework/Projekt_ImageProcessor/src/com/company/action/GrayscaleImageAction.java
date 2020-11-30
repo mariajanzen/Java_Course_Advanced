@@ -12,6 +12,6 @@ public class GrayscaleImageAction implements ImageAction {
     public BufferedImage doAction(BufferedImage image) throws Exception {
         System.out.println("Grayscaling an image");
         //transformation
-        return null;
+        return image;
     }
 }
