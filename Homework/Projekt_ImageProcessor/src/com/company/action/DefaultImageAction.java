@@ -11,7 +11,7 @@ public class DefaultImageAction implements ImageAction {
 
     @Override
     public BufferedImage doAction(BufferedImage image) throws Exception {
-        System.out.println("default action");
-        throw new Exception("Action not supported");
+        System.out.println("default action - not supported");
+        return image;
     }
 }
